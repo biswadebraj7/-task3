@@ -30,7 +30,7 @@ class SecureRandom {
     }
 
     static generateRandomNumber(range) {
-        const randomBytes = crypto.randomBytes(32); // 256 bits for security
+        const randomBytes = crypto.randomBytes(32); 
         const randomInt = parseInt(randomBytes.toString('hex').substring(0, 8), 16); // Convert to integer
         return randomInt % range;
     }
@@ -131,6 +131,18 @@ class DiceGame {
         console.log(`My number is ${computerNumber} (KEY=${key}).`);
         const result = (userChoice + computerNumber) % 6;
         console.log(`The result is ${computerNumber} + ${userChoice} = ${result} (mod 6).`);
+
+        // Calculate the final scores and determine the winner
+        this.computerScore = this.rollDice(this.diceConfigs[1]); // For simplicity, using dice index 1 for the computer's throw
+        console.log(`My throw is ${this.computerScore}.`);
+
+        if (this.userScore > this.computerScore) {
+            console.log(`You win (${this.userScore} > ${this.computerScore})!`);
+        } else if (this.userScore < this.computerScore) {
+            console.log(`I win (${this.computerScore} > ${this.userScore})!`);
+        } else {
+            console.log("It's a tie!");
+        }
     }
 
     // Start the game flow
