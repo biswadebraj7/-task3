@@ -81,31 +81,25 @@ class DiceGame {
         return { userFirst, userRoll, computerRoll };
     }
 
-    // Function to determine who makes the first move
     firstMove() {
         const { computerFirst, computerUserRoll, computerRoll, key } = this.generateRolls();
         
         const { userFirst } = this.userRoll();
         
-        // Compare who makes the first move
         this.firstMovePlayer = (computerFirst === userFirst) ? 
             (computerFirst === 0 ? 'computer' : 'user') :
             (Math.random() > 0.5 ? 'user' : 'computer');
         
         console.log(`First move goes to: ${this.firstMovePlayer}`);
         
-        // Return the generated rolls to be used later in the game
         return { computerUserRoll, computerRoll, key };
     }
 
-    // Function to simulate the game
     play() {
         console.log("Let's start the game!");
         
-        // Get the rolls from both the computer and the user
         const { computerUserRoll, computerRoll, key } = this.firstMove();
 
-        // Now determine who wins
         if (computerUserRoll > computerRoll) {
             console.log(`You win with a roll of ${computerUserRoll} vs ${computerRoll}!`);
         } else if (computerUserRoll < computerRoll) {
@@ -116,7 +110,6 @@ class DiceGame {
     }
 }
 
-// Main Function to initialize the game
 function main() {
     const args = yargs.argv._;
     const diceConfigs = DiceParser.parseDiceConfig(args);
